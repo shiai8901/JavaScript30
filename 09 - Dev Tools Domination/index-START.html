@@ -18,29 +18,70 @@
     }
 
     // Regular
+    console.log("this is a regular console log");
 
     // Interpolated
+    var string = 'variable passed in throgh ${}';
+    console.log(`this is a ES6 back quote ${string}`); 
+
+    console.log("Or, we can use %s to add variable", "percentage sign and letter s");
 
     // Styled
+    console.log("%c I can change console text style in string with percentage sign and letter c", "font-size: 20px; background: red");
 
     // warning!
+    console.warn("use console.warn to print warning with stack trace.");
 
     // Error :|
+    console.error("use console.error to print error with stack trace.");
 
     // Info
+    console.info("use console.info to print the fact information.")
 
     // Testing
+    const p = document.querySelector('p');
+
+    console.assert(p.classList.contains('ouch'), 'The error message will be fired if the first parameter returns false.');
 
     // clearing
+    // console.clear();
 
     // Viewing DOM Elements
+    console.log("console.log will show the DOM element, and console.dir will show all attributes of that DOM element");
+    console.log(p);
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd(`${dog.name}`);
+    })
 
     // counting
+    console.count('Wes');
+    console.count('Ai');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Ai');
+    console.count('Ai');
+    console.count('Wes');
 
     // timing
+    const username = 'shiai8901';
+    const endpoint = 'https://api.github.com/users/' + username;
+    console.log(endpoint);
+    console.time('fetching data');
+    fetch(endpoint)
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
 
+    // table
+    console.table(dogs);
   </script>
 </body>
 </html>
