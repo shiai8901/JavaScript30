@@ -99,6 +99,35 @@
   </div>
 
 <script>
+
+  const checks = document.querySelectorAll('input');
+  console.log(checks);
+
+  let prevChecked = null;
+
+  checks.forEach(check => check.addEventListener('click', handleCheck));
+
+  function handleCheck(e) {
+    let inbetween = false;
+
+    if (e.shiftKey && this.checked) {
+      checks.forEach(check => {
+        
+        if (check === this || check === prevChecked) {
+          inbetween = !inbetween;
+          console.log('inbetween', inbetween);
+        }
+
+        if (inbetween) {
+          check.checked = true;
+        }
+
+      });
+
+    }
+    prevChecked = this;
+  }
+
 </script>
 </body>
 </html>
