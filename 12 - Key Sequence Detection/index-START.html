@@ -13,11 +13,13 @@ const secretCode = 'aishi';
 window.addEventListener('keyup', (e) => {
 	console.log(e.key);
 	pressed.push(e.key);
-	pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+	// original solution: 
+	// pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
 
+	// my solution is: 
+	pressed.splice(0, pressed.length - secretCode.length);
 	/*
-	* second approach: 
-	*	pressed.splice(0, pressed.length - secret.length);
+	*	pressed.splice(0, pressed.length - secretCode.length);
 	* 	array.splice(start, deleteCount);
 	*	when array.length <= secrete.length, do nothing
 	*	when array.length > secrete.length, remove from head
