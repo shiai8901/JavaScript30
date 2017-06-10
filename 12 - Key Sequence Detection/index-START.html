@@ -7,6 +7,30 @@
 </head>
 <body>
 <script>
+const pressed = [];
+const secretCode = 'aishi';
+
+window.addEventListener('keyup', (e) => {
+	console.log(e.key);
+	pressed.push(e.key);
+	// original solution: 
+	// pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+
+	// my solution is: 
+	pressed.splice(0, pressed.length - secretCode.length);
+	/*
+	*	pressed.splice(0, pressed.length - secretCode.length);
+	* 	array.splice(start, deleteCount);
+	*	when array.length <= secrete.length, do nothing
+	*	when array.length > secrete.length, remove from head
+	*/
+
+	console.log(pressed);
+	if (pressed.join("") === secretCode) {
+		console.log("dah dah");
+		cornify_add();
+	}
+});
 </script>
 </body>
 </html>
