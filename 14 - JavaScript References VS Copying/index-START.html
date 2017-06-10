@@ -108,12 +108,16 @@
  
     /* use Object.assign(target, ...sources) to create an empty object, and get properties from all scource objects, and put them into this empty object. The properties are overwritten by other objects that have the same properties later in the parameters order.
 
-
     * we can also use Object.assign(obj1, ...sources) to merge source objects into obj1
     */ 
     const nextYearMe = Object.assign({}, me, {age: 29});
-    console.log(me, nextYearMe, nextYearMe.first);
-    // nextYearMe.first will return undefined, because assign can only copy the first level
+    console.log(me, nextYearMe, nextYearMe.name.first);
+
+    /* stringify and then parse the string back into obj
+    */
+    const lastYearMe = JSON.parse(JSON.stringify(me));
+    lastYearMe.age = 27;
+    console.log(me, lastYearMe, lastYearMe.name.first);
 
     /* object spread IS NOT IN JS YET!
     */
