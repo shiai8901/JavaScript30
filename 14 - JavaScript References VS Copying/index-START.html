@@ -9,9 +9,61 @@
   <script>
     // start with strings, numbers and booleans
 
-    // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    /* string, number and boolean are copied by value, so the let age2 = age is actually making a copy of the VALUE of age, and assign it to age2. There is no connection between age and age2.
+    */
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
 
+    let string = 'hello, Ai';
+    let string2 = string;
+    console.log(string, string2);
+    string = 'I changed!';
+    console.log(string, string2);
+
+    // Let's say we have an array
+    let players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    /* array is copied by reference, so if you make change to either array, the other one also changes.
+    */
+    const copyArr = players;
+    console.log(players, copyArr);
+    players[0] = "nonononono";
+    console.log(players, copyArr);
+    copyArr[3] = "i changed too";
+    console.log(players, copyArr);
+
+    /* use array = [].concat(originArray) to make a shallow copy
+    */
+    players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const copyArr2 = [].concat(players);
+    console.log(players, copyArr2);
+    players[0] = "hahaha";
+    console.log(players, copyArr2);
+    copyArr2[3] = "lalala";
+    console.log(players, copyArr2);
+
+    /* use ES6 Spread expression to make a shallow copy
+    */
+    players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const copyArr3 = [...players];
+    console.log(players, copyArr3);
+    players[0] = "hahaha";
+    console.log(players, copyArr3);
+    copyArr3[3] = "lalala";
+    console.log(players, copyArr3);
+
+    /* use slice to make a shallow copy
+    */
+    players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const copyArr4 = players.slice();
+    console.log(players, copyArr4);
+    players[0] = "hahaha";
+    console.log(players, copyArr4);
+    copyArr4[3] = "lalala";
+    console.log(players, copyArr4);
     // and we want to make a copy of it.
 
     // You might think we can just do something like this:
@@ -45,6 +97,32 @@
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    const me = {
+        name: {
+            first: "Ai",
+            last: "Shi"
+        },
+        age: 28,
+    }
+ 
+    /* use Object.assign(target, ...sources) to create an empty object, and get properties from all scource objects, and put them into this empty object. The properties are overwritten by other objects that have the same properties later in the parameters order.
+
+    * we can also use Object.assign(obj1, ...sources) to merge source objects into obj1
+    */ 
+    const nextYearMe = Object.assign({}, me, {age: 29});
+    console.log(me, nextYearMe, nextYearMe.name.first);
+
+    /* stringify and then parse the string back into obj
+    */
+    const lastYearMe = JSON.parse(JSON.stringify(me));
+    lastYearMe.age = 27;
+    console.log(me, lastYearMe, lastYearMe.name.first);
+
+    /* object spread IS NOT IN JS YET!
+    */
+    // const lastYearMe = {...me};
+    // console.log(me, lastYearMe);
 
   </script>
 
