@@ -182,6 +182,38 @@
     </li>
   </ul>
 <script>
+  const videos = Array.from(document.querySelectorAll('[data-time]'));
+  // console.log(videos);
+
+  // MY SOLUTION WITH FOREACH to get seconds
+  // let seconds = 0;
+  // videos.forEach(video => {
+  //   let time = video.dataset.time;
+  //   time = time.split(":");
+  //   time.forEach(digit => {
+  //     digit.replace(/^(0)/i, '');
+  //   });
+  //   // console.log(time);
+  //   let n = 0;
+  //   for (var i = time.length - 1; i >= 0; i--) {
+  //     seconds += +time[i] * Math.pow(60, n);
+  //     n++;
+  //   }
+  // });
+
+  // USE REDUCE to get seconds
+  let seconds = videos
+    .map(video => video.dataset.time)
+    .map(timestring => {
+      const [mins, secs] = timestring.split(':').map(parseFloat);
+      return (mins * 60) + secs;
+    })
+    .reduce((total, videoSeconds) => total + videoSeconds);
+
+  // CONVERT SECONDS INTO TIME FORMAT
+  console.log(seconds);
+  let totalTime = Math.floor(seconds / 3600) + ":" + Math.floor(Math.floor(seconds % 3600) % 60)+ ":" + Math.floor(seconds % 60);
+  console.log(totalTime);
 </script>
 </body>
 </html>
