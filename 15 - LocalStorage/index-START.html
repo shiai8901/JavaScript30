@@ -26,10 +26,55 @@
   </div>
 
 <script>
-  const addItems = document.querySelector('.add-items');
-  const itemsList = document.querySelector('.plates');
-  const items = [];
+  const addItems = document.querySelector('.add-items'); // addItems is the form
+  const itemsList = document.querySelector('.plates'); // itemsList is the list
+  const items = JSON.parse(window.localStorage.getItem('items')) || [];
+  
+  console.log(items);
 
+
+  function updateList(list = [], listname) {
+    listname.innerHTML = list.map((el, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${el.done ? 'checked' : ''} />
+          <label for="item${i}">${el.name}</label>
+        </li>
+        `;
+    }).join('');
+  }
+
+  function saveListToLocal(items) {
+    window.localStorage.setItem('items', JSON.stringify(items)); // this will override the previous items list
+  }
+
+  function addItem(e) {
+    e.preventDefault();
+    const text = this.querySelector('[name = item]').value;
+    console.log(text);
+    items.push({name: text, done: false});
+    /**** these two lines needs to be added after every change ****/
+    updateList(items, itemsList);    
+    saveListToLocal(items);
+    /**************************************************************/
+    this.reset();
+  }
+
+  function toggleItem(e) {
+    if (e.target.matches('input')) {
+      console.log(e.target);
+      console.log(e.target.dataset.index);
+      items[e.target.dataset.index].done = !items[e.target.dataset.index].done;
+      /**** these two lines needs to be added after every change ****/
+      saveListToLocal(items);
+      updateList(items, itemsList);  
+      /**************************************************************/
+    }
+  }
+
+  addItems.addEventListener('submit', addItem); // add event listener onto the form
+  itemsList.addEventListener('click', toggleItem); // add event listener on parent, and use parent to select child element to dynamically trigger event on child element, because when writing this code, there might not be any child, so we need to add event listener to static element. EVENT DELEGATION
+  updateList(items, itemsList);    
 </script>
 
 
