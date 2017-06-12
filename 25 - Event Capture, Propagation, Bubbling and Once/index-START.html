@@ -39,6 +39,23 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+  function logText(e) {
+    e.stopPropagation(); // will stop file the event in the rest capturing phases
+    console.log(this.classList.value);
+  }
+
+  /* the third parameter is event capture option, if its true, the event will be trigger in the capture phase, triggering sequence will be from outer most to inner most, if it's not specified, the default value is false, the event will be triggered in bubbling phase, from inner most to outer most.
+  */
+  // divs.forEach(div => div.addEventListener('click', logText, {captuer: true}));
+  divs.forEach(div => div.addEventListener('click', logText));
+  
+  /* once will UNBIND the event listener after being triggered once. This can be used in checkout page, prevent user to click button multiple times
+  */
+  button.addEventListener('click', () => {
+    console.log('click!');
+  }, {once: true}); 
 
 </script>
 </body>
