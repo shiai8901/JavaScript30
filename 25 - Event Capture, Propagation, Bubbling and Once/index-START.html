@@ -43,7 +43,6 @@
   const button = document.querySelector('button');
   function logText(e) {
     e.stopPropagation(); // will stop file the event in the rest capturing phases
-
     console.log(this.classList.value);
   }
 
